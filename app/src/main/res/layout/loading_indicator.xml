@@ -4,8 +4,8 @@
     android:layout_height="wrap_content">
 
     <wtf.meier.loadinganimation.LoadingAnimation
-        android:layout_width="400dp"
-        android:layout_height="400dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
 

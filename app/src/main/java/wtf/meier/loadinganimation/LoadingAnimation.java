@@ -31,8 +31,12 @@ public class LoadingAnimation extends View {
 
     private static final float ROTATE_TIME_MILLIS = 100;
     private Paint circlePaint;
-    private Bitmap bitmap;
+
     private Bitmap parentBitmap;
+    private Bitmap bitmap;
+
+    private Bitmap planetBitmapUnscaled;
+    private Bitmap planetBitmap;
     private Matrix matrix = new Matrix();
 
     public LoadingAnimation(Context context) {
@@ -61,37 +65,62 @@ public class LoadingAnimation extends View {
         circlePaint.setColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
 
         parentBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bike);
+        planetBitmapUnscaled = BitmapFactory.decodeResource(getResources(), R.drawable.planet);
 //        setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        bitmap = Bitmap.createScaledBitmap(
+                parentBitmap,
+                getMeasuredWidth() / 5,
+                getMeasuredHeight() / 5,
+                false
+        );
+
+        planetBitmap = Bitmap.createScaledBitmap(
+                planetBitmapUnscaled,
+                Math.min(getMeasuredWidth(), getMeasuredHeight()) / 4,
+                Math.min(getMeasuredWidth(), getMeasuredHeight()) / 4,
+                false
+        );
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        PointF center = new PointF((getWidth() / 2), (getHeight() / 2));
-        bitmap = Bitmap.createScaledBitmap(
-                parentBitmap,
-                getWidth() / 5,
-                getHeight() / 5,
-                false
+
+        long canvasCenterX = (getWidth() / 2);
+        long canvasCenterY = (getWidth() / 2);
+
+//        canvas.drawCircle(
+//                canvasCenterX,
+//                canvasCenterY,
+//                Math.min(getHeight(), getHeight()) / 8,
+//                circlePaint
+//        );
+
+        long rotationRadius = planetBitmap.getWidth() / 2 + 10;
+        float circleOrbitX = (float) (canvasCenterX + rotationRadius * Math.cos(Math.toRadians(degree)));
+        float circleOrbitY = (float) (canvasCenterY + rotationRadius * Math.sin(Math.toRadians(degree)));
+
+
+        matrix.postTranslate(
+                canvasCenterX - planetBitmap.getWidth() / 2,
+                canvasCenterY - planetBitmap.getWidth() / 2
         );
-        canvas.drawCircle(
-                getWidth() / 2,
-                getHeight() / 2,
-                Math.min(getHeight(), getHeight()) / 8,
-                circlePaint
-        );
-        PointF position = getPosition(center, Math.min(getHeight(), getHeight()) / 8 + 10 + bitmap.getHeight() / 8 + 10, degree);
+
+        canvas.drawBitmap(planetBitmap, matrix, null);
+
         matrix.reset();
         matrix.postTranslate(-bitmap.getWidth() / 2, -bitmap.getHeight() / 2); // Centers image
         matrix.postRotate(degree + 90);
-        matrix.postTranslate(position.x, position.y);
+        matrix.postTranslate(circleOrbitX, circleOrbitY);
+
         canvas.drawBitmap(bitmap, matrix, null);
 
+        matrix.reset();
         postDelayed(runnable, 10);
 
     }

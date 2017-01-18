@@ -4,7 +4,6 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal|center_vertical"
     tools:context="wtf.meier.loadinganimation.MainActivity">
 
     <include layout="@layout/loading_indicator" />
