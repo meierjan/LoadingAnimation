@@ -1,4 +1,4 @@
-package wtf.meier.loadinganimation;
+package wtf.meier.nbanimation;
 
 import org.junit.Test;
 

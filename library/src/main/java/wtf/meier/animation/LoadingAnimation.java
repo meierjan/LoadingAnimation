@@ -1,4 +1,4 @@
-package wtf.meier.loadinganimation;
+package wtf.meier.animation;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,6 +12,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
+
 
 /**
  * Created by meier on 17/01/2017.

@@ -1,4 +1,4 @@
-package wtf.meier.loadinganimation;
+package wtf.meier.animation;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("wtf.meier.loadinganimation", appContext.getPackageName());
+        assertEquals("wtf.meier.loadinganimation.test", appContext.getPackageName());
     }
 }

@@ -4,7 +4,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="wtf.meier.loadinganimation.MainActivity">
+    tools:context="wtf.meier.nbanimation.MainActivity">
 
     <include layout="@layout/loading_indicator" />
 </LinearLayout>
