@@ -23,7 +23,7 @@ public class LoadingAnimation extends View {
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            degree = (degree + 2) % 360;
+            degree = (degree + 4) % 360;
             invalidate();
         }
     };
@@ -122,7 +122,7 @@ public class LoadingAnimation extends View {
         canvas.drawBitmap(bitmap, matrix, null);
 
         matrix.reset();
-        postDelayed(runnable, 10);
+        postDelayed(runnable, 20);
 
     }
 
